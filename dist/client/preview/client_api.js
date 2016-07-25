@@ -149,6 +149,19 @@ var ClientApi = function () {
         pageBus.emit('selectStory', { kind: resolvedKind, story: resolvedStory });
       };
     }
+  }, {
+    key: 'getStoryBook',
+    value: function getStoryBook() {
+      var _this2 = this;
+
+      return this._storyStore.getStoryKinds().map(function (kind) {
+        var stories = _this2._storyStore.getStories(kind).map(function (name) {
+          var render = _this2._storyStore.getStory(kind, name);
+          return { name: name, render: render };
+        });
+        return { kind: kind, stories: stories };
+      });
+    }
   }]);
   return ClientApi;
 }();
